@@ -1,0 +1,16 @@
+docker rm <process_id>
+
+docker rmi <image_id>
+
+docker build . -t <container name>
+
+docker attach <container name>
+
+# Docker press Ctrl+P followed by Ctrl+Q
+# Tmux press Ctrl+B followed D
+
+docker images
+
+docker ps -a
+
+
