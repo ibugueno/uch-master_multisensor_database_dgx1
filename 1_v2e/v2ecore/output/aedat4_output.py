@@ -20,7 +20,7 @@ class AEDat4Output:
     """
 
 
-    def __init__(self, filepath: str, output_width=640, output_height=480):
+    def __init__(self, filepath: str, output_width=640, output_height=480, label_signal_noise:bool=False):
         self.filepath = filepath
         self.numEventsWritten = 0
         self.numOnEvents=0
@@ -34,7 +34,10 @@ class AEDat4Output:
          
         self.store = dv.EventStore()
 
-        resolution = (640, 480)
+        self.label_signal_noise=label_signal_noise
+
+
+        resolution = (output_width, output_height)
         # Event only configuration
         config = dv.io.MonoCameraWriter.EventOnlyConfig("DVXplorer_sample", resolution)
 
@@ -56,6 +59,7 @@ class AEDat4Output:
             self.writer.writeEvents(self.store)
             self.writer = None
 
+    '''
     def appendEvents(self, events: np.ndarray, signnoise_label:np.ndarray=None ):
         """Append events to AEDAT-4.0 output
 
@@ -96,6 +100,55 @@ class AEDat4Output:
             self.numEventsWritten += 1
         
         # logger.info('wrote {} events'.format(n))
+    '''
+    def appendEvents(self, events: np.ndarray, signnoise_label: np.ndarray = None):
+        """Append events to AEDAT-4.0 output, with optional noise labeling.
+
+        Parameters
+        ----------
+        events: np.ndarray if any events, else None
+            [N, 4], each row contains [timestamp, x coordinate, y coordinate, sign of event (+1 ON, -1 OFF)].
+            NOTE x,y, NOT y,x.
+        signnoise_label: np.ndarray
+            [N] each entry is 1 for signal or 0 for noise
+
+        Returns
+        -------
+        None
+        """
+
+        if self.writer is None:
+            return
+
+        if len(events) == 0:
+            return
+
+        n = events.shape[0]
+        for i, event in enumerate(events):
+            t = int(event[0] * 1e6)  # Convert to microseconds
+            x = int(event[1])
+            if self.flipx: x = (self.sizex - 1) - x  # Flip x if needed
+            y = int(event[2])
+            if self.flipy: y = (self.sizey - 1) - y  # Flip y if needed
+            p = int((event[3] + 1) / 2)  # Convert polarity: 0=off, 1=on
+
+            # Check for noise and label accordingly
+            is_noise = signnoise_label is not None and not signnoise_label[i]
+
+            try:
+                if is_noise:
+                    # Use `is_noise=True` to tag the event if supported
+                    self.store.push_back(t, x, y, p, is_noise=True)
+                else:
+                    self.store.push_back(t, x, y, p)
+            except RuntimeError as e:
+                logger.warning(f'Caught exception while adding event {i}: {e}')
+
+            if p == 1:
+                self.numOnEvents += 1
+            else:
+                self.numOffEvents += 1
+            self.numEventsWritten += 1
 
 
 if __name__ == '__main__':
