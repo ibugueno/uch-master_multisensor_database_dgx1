@@ -39,7 +39,7 @@ RUN /opt/conda/bin/conda create -n v2e python=3.10 -y
 
 # Instalar dependencias usando el entorno creado
 COPY requirements.txt /app/requirements.txt
-RUN /opt/conda/bin/conda run -n v2e pip install -r /app/requirements.txt
+#RUN /opt/conda/bin/conda run -n v2e pip install -r /app/requirements.txt
 
 # Configurar el entorno por defecto en bash
 RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate v2e" >> ~/.bashrc
