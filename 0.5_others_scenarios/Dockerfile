@@ -6,9 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Actualizar paquetes e instalar zip
 RUN apt-get update && \
-    apt-get install -y zip && \
+    apt-get install -y zip wget && \
     apt-get clean && \
-    apt-get wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Instalar Miniconda
