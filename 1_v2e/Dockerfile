@@ -27,6 +27,9 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Configurar Conda en el PATH
 ENV PATH=/opt/conda/bin:$PATH
 
+# Inicializar Conda para usar conda activate
+RUN /opt/conda/bin/conda init bash
+
 # Crear carpetas necesarias para el proyecto
 WORKDIR /app
 RUN mkdir -p /app/input /app/output /app/tmp
@@ -35,16 +38,11 @@ RUN mkdir -p /app/input /app/output /app/tmp
 ADD . /app
 
 # Crear el entorno Conda y activar
-RUN conda create -n v2e python=3.10 -y && \
-    echo "conda activate v2e" >> ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc && conda activate base && conda create -n v2e python=3.10 -y"
 
-# Instalar dependencias desde un archivo `requirements.txt` o `environment.yml`
-# O puedes instalar paquetes individuales como `get-video-properties`
+# Instalar dependencias desde un archivo requirements.txt
 COPY requirements.txt /app/requirements.txt
 RUN /bin/bash -c "source ~/.bashrc && conda activate v2e && pip install -r /app/requirements.txt"
 
-# Instalar dependencias adicionales (si no usas un archivo de dependencias)
-RUN /bin/bash -c "source ~/.bashrc && conda activate v2e && pip install get-video-properties"
-
-# Configurar el comando por defecto
+# Comando por defecto
 CMD ["/bin/bash"]
