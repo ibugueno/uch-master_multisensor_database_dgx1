@@ -43,7 +43,7 @@ COPY requirements.txt /app/requirements.txt
 # Configurar el entorno por defecto en bash
 RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate v2e" >> ~/.bashrc
 
-RUN echo "pip install -r /app/requirements.txt"
+#RUN echo "pip install -r /app/requirements.txt"
 
 # Comando por defecto
 CMD ["/bin/bash"]
