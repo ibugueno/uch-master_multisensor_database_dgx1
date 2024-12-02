@@ -1,7 +1,7 @@
-# Usar una imagen base ligera con soporte para CUDA (si lo necesitas)
+# Usar imagen base con soporte CUDA y Ubuntu 20.04
 FROM nvidia/cuda:11.3.1-base-ubuntu20.04
 
-# Evitar preguntas interactivas en la instalación de paquetes
+# Evitar preguntas interactivas durante la instalación
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Actualizar el sistema e instalar dependencias esenciales
@@ -27,12 +27,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Configurar Conda en el PATH
 ENV PATH=/opt/conda/bin:$PATH
 
-# Inicializar Conda
-RUN /opt/conda/bin/conda init bash
-
-# Activate the Conda environment
-RUN . /opt/conda/etc/profile.d/conda.sh
-
 # Crear carpetas necesarias para el proyecto
 WORKDIR /app
 RUN mkdir -p /app/input /app/output /app/tmp
@@ -40,12 +34,15 @@ RUN mkdir -p /app/input /app/output /app/tmp
 # Copiar los contenidos actuales al contenedor
 ADD . /app
 
-# Crear el entorno Conda y activar
-RUN /bin/bash -c "source ~/.bashrc && conda activate base && conda create -n v2e python=3.10 -y"
+# Crear el entorno Conda y evitar 'conda activate'
+RUN /opt/conda/bin/conda create -n v2e python=3.10 -y
 
-# Instalar dependencias desde un archivo requirements.txt
+# Instalar dependencias usando el entorno creado
 COPY requirements.txt /app/requirements.txt
-RUN /bin/bash -c "source ~/.bashrc && conda activate v2e && pip install -r /app/requirements.txt"
+RUN /opt/conda/bin/conda run -n v2e pip install -r /app/requirements.txt
+
+# Configurar el entorno por defecto en bash
+RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate v2e" >> ~/.bashrc
 
 # Comando por defecto
 CMD ["/bin/bash"]
