@@ -4,7 +4,7 @@
 INPUT_FILE="input/events_folders.txt"
 
 # Activar el entorno conda
-source ~/anaconda3/etc/profile.d/conda.sh
+source /opt/conda/etc/profile.d/conda.sh
 conda activate v2e
 
 # Leer cada línea del archivo

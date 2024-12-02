@@ -1,13 +1,13 @@
 import os
 
 # Ruta raíz
-root_dir = 'input'
+root_dir = '../input'
 
 # Lista para almacenar todas las rutas completas de los directorios de orientación
 orientation_dirs = []
 
 # Archivo de salida
-output_file = 'input/events_folders.txt'
+output_file = '../input/events_folders.txt'
 
 # Recorrer recursivamente la estructura de directorios
 for subdir1 in ['davis346', 'evk4']:  # Nivel 1: 'davis346', 'evk4'

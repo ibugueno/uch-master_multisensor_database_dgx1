@@ -40,8 +40,12 @@ class ImageFolderReader(object):
         """
         self.image_folder_path = image_folder_path
 
+        # Filtrar solo archivos de imágenes
+        valid_extensions = ('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.tif')  # Añade extensiones si es necesario
         self.image_file_list = sorted(
-            glob.glob("{}".format(self.image_folder_path) + "/*.*"))
+            [f for f in glob.glob(f"{self.image_folder_path}/*.*")
+             if f.lower().endswith(valid_extensions)]
+        )
 
         self.frame_rate = frame_rate
 
