@@ -71,10 +71,10 @@ def generate_frames_every_1ms(events, sensor_size, output_folder, window_size_us
 
 
 # Dimensiones del sensor (debe configurarse según el sensor utilizado)
-sensor_size = (720, 1280)
+sensor_size = (260, 346)
 
 # Ruta al archivo AEDAT4
-aedat_file_path = "output/zapatilla/events.aedat4"
+aedat_file_path = "../output/almohada_back_davis346/events.aedat4"
 
 # Leer todos los eventos del archivo AEDAT4
 events = []
@@ -92,6 +92,6 @@ with AedatFile(aedat_file_path) as f:
         print("No se encontró el stream de eventos en el archivo.")
 
 # Generar frames de TimestampImage cada 1ms con ventana de 5ms
-output_folder = "output/zapatilla/frames"
+output_folder = "../output/almohada_back_davis346/frames"
 
 generate_frames_every_1ms(events, sensor_size, output_folder, window_size_us=5_000)
