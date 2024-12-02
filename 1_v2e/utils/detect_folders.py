@@ -7,7 +7,7 @@ root_dir = 'input'
 orientation_dirs = []
 
 # Recorrer recursivamente la estructura de directorios
-for subdir1 in os.listdir(root_dir):  # Nivel 1: 'evk4'
+for subdir1 in ['davis346', 'evk4']:  # Nivel 1: 'evk4'
     subdir1_path = os.path.join(root_dir, subdir1)
     if os.path.isdir(subdir1_path):
         for subdir2 in os.listdir(subdir1_path):  # Nivel 2: 'evk4_scn2_lum9'
