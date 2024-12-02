@@ -27,7 +27,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Configurar Conda en el PATH
 ENV PATH=/opt/conda/bin:$PATH
 
-# Inicializar Conda para usar conda activate
+# Inicializar Conda
 RUN /opt/conda/bin/conda init bash
 
 # Crear carpetas necesarias para el proyecto
