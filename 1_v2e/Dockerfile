@@ -30,6 +30,9 @@ ENV PATH=/opt/conda/bin:$PATH
 # Inicializar Conda
 RUN /opt/conda/bin/conda init bash
 
+# Activate the Conda environment
+RUN . /opt/conda/etc/profile.d/conda.sh
+
 # Crear carpetas necesarias para el proyecto
 WORKDIR /app
 RUN mkdir -p /app/input /app/output /app/tmp
