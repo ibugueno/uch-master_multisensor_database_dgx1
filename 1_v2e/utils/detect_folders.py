@@ -6,8 +6,11 @@ root_dir = 'input'
 # Lista para almacenar todas las rutas completas de los directorios de orientación
 orientation_dirs = []
 
+# Archivo de salida
+output_file = 'input/events_folders.txt'
+
 # Recorrer recursivamente la estructura de directorios
-for subdir1 in ['davis346', 'evk4']:  # Nivel 1: 'evk4'
+for subdir1 in ['davis346', 'evk4']:  # Nivel 1: 'davis346', 'evk4'
     subdir1_path = os.path.join(root_dir, subdir1)
     if os.path.isdir(subdir1_path):
         for subdir2 in os.listdir(subdir1_path):  # Nivel 2: 'evk4_scn2_lum9'
@@ -24,13 +27,19 @@ for subdir1 in ['davis346', 'evk4']:  # Nivel 1: 'evk4'
                                     if os.path.isdir(subfolder_path):
                                         for orientation_dir in os.listdir(subfolder_path):  # Nivel 6: 'orientation_x_y_z'
                                             orientation_dir_path = os.path.join(subfolder_path, orientation_dir)
-                                            if os.path.isdir(orientation_dir_path):
-                                                orientation_dirs.append(orientation_dir_path)
+                                            if os.path.isdir(orientation_dir_path):  # Verificar que existe
+                                                # Remover el prefijo 'input/' de la ruta
+                                                relative_path = os.path.relpath(orientation_dir_path, root_dir)
+                                                orientation_dirs.append(relative_path)
+
+# Guardar las rutas en un archivo de texto
+with open(output_file, 'w') as f:
+    f.write('\n'.join(orientation_dirs))
 
 # Imprimir las rutas generadas
 if orientation_dirs:
-    print(f"Se encontraron {len(orientation_dirs)} directorios de orientación:")
-    for path in orientation_dirs:
-        print(path)
+    print(f"Se encontraron {len(orientation_dirs)} directorios de orientación. Guardados en {output_file}")
+    #for path in orientation_dirs:
+    #    print(path)
 else:
     print("No se encontraron directorios de orientación.")
