@@ -50,5 +50,5 @@ def process_images_in_folder(input_dir, output_dir, blur_kernel=(7, 7)):
                     print(f"El archivo no es una imagen válida o está corrupto: {input_path}")
 
 # Ejemplo de uso
-txt_file_path = 'carpetas.txt'  # Archivo .txt con las direcciones a carpetas
+txt_file_path = 'input/all_folders.txt'  # Archivo .txt con las direcciones a carpetas
 apply_blur_to_folders(txt_file_path, input_prefix='input/', output_prefix='output/', blur_kernel=(7, 7))

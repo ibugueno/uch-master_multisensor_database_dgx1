@@ -1,6 +1,6 @@
 import cv2
 
-def recortar_y_redimensionar(imagen_path, salida_path, ancho=346, alto=260):
+def recortar_y_redimensionar(imagen_path, salida_path, ancho=640, alto=480):
     # Leer la imagen
     imagen = cv2.imread(imagen_path)
 
@@ -30,8 +30,8 @@ def recortar_y_redimensionar(imagen_path, salida_path, ancho=346, alto=260):
     return salida_path
 
 # Archivos de entrada y salida
-imagen1_path = 'data/back_1.jpg'
-imagen1_salida = 'data/back_1_davis346.jpg'
+imagen1_path = '../data/back_1.jpg'
+imagen1_salida = '../data/back_1_zed2.jpg'
 
 # Procesar imagen 1
 resultado1 = recortar_y_redimensionar(imagen1_path, imagen1_salida)

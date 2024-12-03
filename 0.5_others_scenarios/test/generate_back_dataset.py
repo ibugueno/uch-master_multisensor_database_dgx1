@@ -55,7 +55,7 @@ def procesar_imagenes(directorio_objetos, imagen_fondo_path, directorio_salida, 
 
     # Recorrer todas las imágenes en el directorio de objetos
     for nombre_archivo in os.listdir(directorio_objetos):
-        if nombre_archivo.endswith('.png'):  # Procesar solo archivos JPG
+        if nombre_archivo.endswith('.jpg'):  # Procesar solo archivos JPG
             objeto_path = os.path.join(directorio_objetos, nombre_archivo)
             salida_path = os.path.join(directorio_salida, nombre_archivo)
 
@@ -68,12 +68,12 @@ def procesar_imagenes(directorio_objetos, imagen_fondo_path, directorio_salida, 
             print(f'Procesado: {nombre_archivo}')
 
 # Parámetros
-directorio_objetos = 'data/almohada'  # Directorio con imágenes de objetos
-imagen_fondo_path = 'data/back_1_davis346.jpg'  # Fondo conocido
-directorio_salida = 'data/salida'  # Directorio para guardar las imágenes procesadas
+directorio_objetos = '../data/zapatilla'  # Directorio con imágenes de objetos
+imagen_fondo_path = '../back/back_1_evk4.jpg'  # Fondo conocido
+directorio_salida = '../data/salida_zapatilla'  # Directorio para guardar las imágenes procesadas
 #color_fondo = (92, 79, 79)  # Color del fondo a eliminar (RGB)
 color_fondo = (71, 71, 71)  # Color del fondo a eliminar (RGB)
-porcentaje_tolerancia = 10  # Porcentaje de tolerancia para el color de fondo
+porcentaje_tolerancia = 2  # Porcentaje de tolerancia para el color de fondo
 
 # Ejecutar el procesamiento
 procesar_imagenes(directorio_objetos, imagen_fondo_path, directorio_salida, color_fondo, porcentaje_tolerancia)

@@ -4,9 +4,9 @@ FROM ubuntu:20.04
 # Establecer variables de entorno para evitar interacciones durante la construcción
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Actualizar paquetes e instalar zip
+# Actualizar paquetes e instalar dependencias
 RUN apt-get update && \
-    apt-get install -y zip wget && \
+    apt-get install -y zip wget libgl1 libglib2.0-0 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

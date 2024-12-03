@@ -1,16 +1,16 @@
 import os
 
 # Ruta raíz
-root_dir = '../input'
+root_dir = 'input'
 
 # Lista para almacenar todas las rutas completas de los directorios de orientación
 orientation_dirs = []
 
 # Archivo de salida
-output_file = '../input/events_folders.txt'
+output_file = 'input/all_folders.txt'
 
 # Recorrer recursivamente la estructura de directorios
-for subdir1 in ['davis346', 'evk4']:  # Nivel 1: 'davis346', 'evk4'
+for subdir1 in ['asus','zed2','davis346', 'evk4']:  # Nivel 1: 'davis346', 'evk4'
     subdir1_path = os.path.join(root_dir, subdir1)
     if os.path.isdir(subdir1_path):
         for subdir2 in os.listdir(subdir1_path):  # Nivel 2: 'evk4_scn2_lum9'
