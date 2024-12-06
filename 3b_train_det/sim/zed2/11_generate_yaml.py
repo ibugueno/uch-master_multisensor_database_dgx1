@@ -30,7 +30,7 @@ class_names = {v: k for k, v in clases.items()}
 
 # Define las rutas a las particiones de imágenes
 exp_path = '1_without_back_without_blur'
-sensor = 'asus'
+sensor = 'zed2'
 
 train_dir = f"input/{exp_path}/train/{sensor}"
 val_dir = f"input/{exp_path}/val/{sensor}"

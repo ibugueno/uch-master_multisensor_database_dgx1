@@ -18,7 +18,7 @@ model.train(
     device=0,                     # GPU específica (0 para la primera GPU, o 'cpu' para CPU)
     workers=4,                    # Número de workers para la carga de datos
     project='output/ddbb-s/detection/',        # Carpeta donde se guardarán los resultados
-    name='asus_exp1_' # Nombre del experimento
+    name='zed2_exp1_' # Nombre del experimento
 )
 
 # Al finalizar el entrenamiento, puedes ver las métricas finales:
