@@ -20,9 +20,9 @@ ENV PATH=/opt/conda/bin:$PATH
 
 # Instalar Python y dependencias en el environment base
 RUN conda install -n base python=3.8 -y && \
-    pip install --upgrade pip && \
-    pip install ultralytics torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip install opencv-python
+    pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
+    pip install --no-cache-dir ultralytics opencv-python
 
 # Establecer el directorio de trabajo
 WORKDIR /app
