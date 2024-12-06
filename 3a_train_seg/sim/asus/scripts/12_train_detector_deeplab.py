@@ -9,7 +9,6 @@ from tqdm import tqdm
 from PIL import Image
 import numpy as np
 import time
-from segmentation_models_pytorch import DeepLabV3
 
 # Dataset personalizado para segmentación
 class SegmentationDataset(Dataset):

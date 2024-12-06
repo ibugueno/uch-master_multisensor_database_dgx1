@@ -50,7 +50,7 @@ def generate_yaml(output_file, train_image_dir, train_mask_dir, val_image_dir, v
 if __name__ == "__main__":
     # Rutas del dataset
     exp_path = '1_without_back_without_blur'
-    sensor = 'asus'
+    sensor = 'zed2'
     train_image_dir = f"input/{exp_path}/train/{sensor}"  # Cambia esta ruta
     train_mask_dir = f"input/labels/segmentation/train/{sensor}"    # Cambia esta ruta
     val_image_dir = f"input/{exp_path}/val/{sensor}"      # Cambia esta ruta

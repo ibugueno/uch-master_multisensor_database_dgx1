@@ -1,0 +1,19 @@
+mkdir -p /app/paths/4_with_back_with_blur/train/asus/
+mkdir -p /app/paths/4_with_back_with_blur/train/asus/
+
+ln -s /app/input/4_with_back_with_blur/train/asus/ /app/paths/4_with_back_with_blur/train/asus/images
+ln -s /app/input/labels/detection/yolo/train/asus/ /app/paths/4_with_back_with_blur/train/asus/labels
+
+
+mkdir -p /app/paths/4_with_back_with_blur/val/asus/
+mkdir -p /app/paths/4_with_back_with_blur/val/asus/
+
+ln -s /app/input/4_with_back_with_blur/val/asus/ /app/paths/4_with_back_with_blur/val/asus/images
+ln -s /app/input/labels/detection/yolo/val/asus/ /app/paths/4_with_back_with_blur/val/asus/labels
+
+
+mkdir -p /app/paths/4_with_back_with_blur/test/asus/
+mkdir -p /app/paths/4_with_back_with_blur/test/asus/
+
+ln -s /app/input/4_with_back_with_blur/test/asus/ /app/paths/4_with_back_with_blur/test/asus/images
+ln -s /app/input/labels/detection/yolo/test/asus/ /app/paths/4_with_back_with_blur/test/asus/labels

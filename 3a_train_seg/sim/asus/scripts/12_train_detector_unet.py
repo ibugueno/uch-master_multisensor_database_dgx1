@@ -3,13 +3,12 @@ import yaml
 import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision.models.segmentation import deeplabv3_resnet50
-from torchvision.models.segmentation import deeplabv3_mobilenet_v3_large
+from segmentation_models_pytorch import Unet
 from torchvision.transforms import functional as F
 from tqdm import tqdm
 from PIL import Image
 import numpy as np
 import time
-from segmentation_models_pytorch import DeepLabV3
 
 # Dataset personalizado para segmentación
 class SegmentationDataset(Dataset):
@@ -42,9 +41,13 @@ def get_transform():
     return transform
 
 def get_model(num_classes):
-    # Usar DeepLabV3 con backbone MobileNetV3
-    model = deeplabv3_mobilenet_v3_large(pretrained=True)
-    model.classifier[4] = torch.nn.Conv2d(256, num_classes, kernel_size=(1, 1))
+    # Usar UNet con encoder preentrenado en ImageNet
+    model = Unet(
+        encoder_name="resnet34",      # Encoder preentrenado
+        encoder_weights="imagenet",  # Pesos preentrenados
+        in_channels=3,               # Imágenes RGB
+        classes=num_classes           # Número de clases (incluyendo fondo)
+    )
     return model
 
 def load_config(yaml_path):
@@ -71,7 +74,12 @@ def train_model(config):
     model = get_model(num_classes)
     model.to(device)
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.SGD(
+        model.parameters(),
+        lr=learning_rate,
+        momentum=0.9,
+        weight_decay=1e-4  # Similar al efecto de AdamW
+    )
 
     for epoch in range(num_epochs):
         model.train()
@@ -84,7 +92,7 @@ def train_model(config):
             masks = masks.to(device)
 
             optimizer.zero_grad()
-            output = model(images)['out']
+            output = model(images)
             loss = torch.nn.functional.cross_entropy(output, masks)
             loss.backward()
             optimizer.step()
@@ -128,7 +136,7 @@ def evaluate_model(config):
         for images, masks in progress_bar:
             images = images.to(device)
             masks = masks.to(device)
-            output = model(images)['out']
+            output = model(images)
             preds = torch.argmax(output, dim=1).cpu().numpy().flatten()
             masks = masks.cpu().numpy().flatten()
 
