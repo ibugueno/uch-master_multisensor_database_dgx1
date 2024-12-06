@@ -13,12 +13,18 @@ from segmentation_models_pytorch import DeepLabV3
 
 # Dataset personalizado para segmentación
 class SegmentationDataset(Dataset):
-    def __init__(self, image_dir, mask_dir, transforms=None):
+    def __init__(self, image_dir, mask_dir, transforms=None, use_half=False):
         self.image_dir = image_dir
         self.mask_dir = mask_dir
         self.transforms = transforms
         self.image_files = sorted(os.listdir(image_dir))
         self.mask_files = sorted(os.listdir(mask_dir))
+        
+        # Usar solo la mitad de los datos
+        if use_half:
+            half_size = len(self.image_files) // 2
+            self.image_files = self.image_files[:half_size]
+            self.mask_files = self.mask_files[:half_size]
 
     def __len__(self):
         return len(self.image_files)
@@ -35,6 +41,7 @@ class SegmentationDataset(Dataset):
             image = self.transforms(image)
 
         return image, torch.tensor(mask, dtype=torch.long)
+
 
 def get_transform():
     def transform(img):
@@ -65,7 +72,7 @@ def train_model(config):
     num_workers = config['hyperparameters']['num_workers']
     device = torch.device(config['hyperparameters']['device'] if torch.cuda.is_available() else 'cpu')
 
-    dataset = SegmentationDataset(train_image_dir, train_mask_dir, transforms=get_transform())
+    dataset = SegmentationDataset(train_image_dir, train_mask_dir, transforms=get_transform(), use_half=True)
     data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     num_classes = config['num_classes']
     model = get_model(num_classes)
