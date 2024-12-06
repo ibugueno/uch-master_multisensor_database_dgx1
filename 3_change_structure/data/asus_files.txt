@@ -1,0 +1,4 @@
+input/asus/asus_scn0_lum9/scene_0/almohada/lum9/orientation_-10_72_-129/image_0001.jpg
+input/asus/asus_scn0_lum9/scene_0/almohada/lum9/orientation_-10_72_-129/image_0003.jpg
+input/asus/asus_scn0_lum9/scene_0/almohada/lum9/orientation_-10_72_-129/image_0002.jpg
+input/asus/asus_scn0_lum9/scene_0/almohada/lum9/orientation_-10_72_-129/image_0000.jpg

@@ -3,9 +3,18 @@
 # Archivo que contiene los directorios
 INPUT_FILE="input/events_folders.txt"
 
-# Activar el entorno conda
+# Activar el entorno conda desde la ruta conocida
+CONDA_PATH="/opt/conda/condabin/conda"
 source /opt/conda/etc/profile.d/conda.sh
-conda activate v2e
+
+# Verificar si Conda está accesible
+if ! command -v $CONDA_PATH &> /dev/null; then
+    echo "Conda no está disponible en la ruta $CONDA_PATH. Verifica la instalación."
+    exit 1
+fi
+
+# Activar el entorno
+$CONDA_PATH activate v2e
 
 # Leer cada línea del archivo
 while IFS= read -r line; do

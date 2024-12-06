@@ -4,6 +4,9 @@ FROM nvidia/cuda:11.3.1-base-ubuntu20.04
 # Evitar preguntas interactivas durante la instalación
 ENV DEBIAN_FRONTEND=noninteractive
 
+# instalat tmux y vim
+# instalar requirements en v2e
+
 # Actualizar el sistema e instalar dependencias esenciales
 RUN apt-get update && apt-get install -y \
     wget \
