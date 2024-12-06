@@ -12,11 +12,11 @@ yaml_file = 'data/1_data_config.yaml'
 # Entrenar el modelo usando el archivo .yaml y las dimensiones especificadas
 model.train(
     data=yaml_file,      # Ruta al archivo .yaml con la configuración del dataset
-    epochs=20,                    # Número de épocas
+    epochs=1,                    # Número de épocas
     batch=256,                     # Tamaño del batch
     imgsz=(img_width, img_height),  # Dimensiones personalizadas de las imágenes
     device=0,                     # GPU específica (0 para la primera GPU, o 'cpu' para CPU)
-    workers=4,                    # Número de workers para la carga de datos
+    workers=16,                    # Número de workers para la carga de datos
     project='output/ddbb-s/detection/',        # Carpeta donde se guardarán los resultados
     name='zed2_exp1_' # Nombre del experimento
 )
