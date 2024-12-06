@@ -1,0 +1,23 @@
+# Exp 1
+
+mkdir -p /app/paths/1_without_back_without_blur/train/zed2/
+mkdir -p /app/paths/1_without_back_without_blur/train/zed2/
+
+ln -s /app/input/1_without_back_without_blur/train/zed2/ /app/paths/1_without_back_without_blur/train/zed2/images
+ln -s /app/input/labels/detection/yolo/train/zed2/ /app/paths/1_without_back_without_blur/train/zed2/labels
+
+
+mkdir -p /app/paths/1_without_back_without_blur/val/zed2/
+mkdir -p /app/paths/1_without_back_without_blur/val/zed2/
+
+ln -s /app/input/1_without_back_without_blur/val/zed2/ /app/paths/1_without_back_without_blur/val/zed2/images
+ln -s /app/input/labels/detection/yolo/val/zed2/ /app/paths/1_without_back_without_blur/val/zed2/labels
+
+
+mkdir -p /app/paths/1_without_back_without_blur/test/zed2/
+mkdir -p /app/paths/1_without_back_without_blur/test/zed2/
+
+ln -s /app/input/1_without_back_without_blur/test/zed2/ /app/paths/1_without_back_without_blur/test/zed2/images
+ln -s /app/input/labels/detection/yolo/test/zed2/ /app/paths/1_without_back_without_blur/test/zed2/labels
+
+# Exp2

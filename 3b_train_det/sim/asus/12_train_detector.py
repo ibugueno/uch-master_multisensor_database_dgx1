@@ -5,7 +5,7 @@ img_width = 640  # Cambia este valor por el ancho de tus imágenes
 img_height = 480  # Cambia este valor por el alto de tus imágenes
 
 # Cargar el modelo preentrenado YOLOv8
-model = YOLO('yolov8n.pt')  # Puedes cambiar a otro modelo preentrenado (yolov8s.pt, etc.)
+model = YOLO('yolo11n.pt')  # Puedes cambiar a otro modelo preentrenado (yolov8s.pt, etc.)
 
 yaml_file = 'data/1_data_config.yaml'
 
@@ -13,10 +13,10 @@ yaml_file = 'data/1_data_config.yaml'
 model.train(
     data=yaml_file,      # Ruta al archivo .yaml con la configuración del dataset
     epochs=1,                    # Número de épocas
-    batch=256,                     # Tamaño del batch
+    batch=128,                     # Tamaño del batch
     imgsz=(img_width, img_height),  # Dimensiones personalizadas de las imágenes
     device=0,                     # GPU específica (0 para la primera GPU, o 'cpu' para CPU)
-    workers=16,                    # Número de workers para la carga de datos
+    workers=4,                    # Número de workers para la carga de datos
     project='output/ddbb-s/detection/',        # Carpeta donde se guardarán los resultados
     name='asus_exp1_' # Nombre del experimento
 )

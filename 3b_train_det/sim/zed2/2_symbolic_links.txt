@@ -1,0 +1,19 @@
+mkdir -p /app/paths/2_without_back_with_blur/train/zed2/
+mkdir -p /app/paths/2_without_back_with_blur/train/zed2/
+
+ln -s /app/input/2_without_back_with_blur/train/zed2/ /app/paths/2_without_back_with_blur/train/zed2/images
+ln -s /app/input/labels/detection/yolo/train/zed2/ /app/paths/2_without_back_with_blur/train/zed2/labels
+
+
+mkdir -p /app/paths/2_without_back_with_blur/val/zed2/
+mkdir -p /app/paths/2_without_back_with_blur/val/zed2/
+
+ln -s /app/input/2_without_back_with_blur/val/zed2/ /app/paths/2_without_back_with_blur/val/zed2/images
+ln -s /app/input/labels/detection/yolo/val/zed2/ /app/paths/2_without_back_with_blur/val/zed2/labels
+
+
+mkdir -p /app/paths/2_without_back_with_blur/test/zed2/
+mkdir -p /app/paths/2_without_back_with_blur/test/zed2/
+
+ln -s /app/input/2_without_back_with_blur/test/zed2/ /app/paths/2_without_back_with_blur/test/zed2/images
+ln -s /app/input/labels/detection/yolo/test/zed2/ /app/paths/2_without_back_with_blur/test/zed2/labels
