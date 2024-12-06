@@ -18,30 +18,24 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Configurar Conda en el PATH
 ENV PATH=/opt/conda/bin:$PATH
 
-# Crear el environment base e instalar Python
-RUN /opt/conda/bin/conda create -n base python=3.8 -y && \
-    echo "conda activate base" > ~/.bashrc
-
-# Activar Conda y configurar el shell
-SHELL ["/bin/bash", "--login", "-c"]
-
-# Instalar YOLO y dependencias
-RUN conda activate base && \
+# Instalar Python y dependencias en el environment base
+RUN conda install -n base python=3.8 -y && \
+    pip install --upgrade pip && \
     pip install ultralytics torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
     pip install opencv-python
 
-# Set the working directory to /app
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copiar el contenido del proyecto
 ADD . /app
-RUN mkdir /app/input
-RUN mkdir /app/output
-RUN mkdir /app/tmp
 
-# Configurar el entorno por defecto en bash
-RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+# Crear carpetas para datos de entrada, salida y temporales
+RUN mkdir /app/input && mkdir /app/output && mkdir /app/tmp
 
+# Configurar el entorno Conda en bash por defecto
+RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
 
-# Comando por defecto (puedes cambiarlo si es necesario)
+# Comando por defecto
 CMD ["bash"]
