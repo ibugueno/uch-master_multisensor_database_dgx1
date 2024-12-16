@@ -30,7 +30,7 @@ def generate_yaml(output_file, train_image_dir, train_label_dir, val_image_dir, 
 
 if __name__ == "__main__":
     # Configuración para el sensor y experimento
-    exp_path = '1_without_back_without_blur'
+    exp_path = '3_with_back_without_blur'
     sensor = 'asus'
     root_data = '../input/ddbb-s-frames/data'
     root_labels = '../input/ddbb-s-frames/labels'
