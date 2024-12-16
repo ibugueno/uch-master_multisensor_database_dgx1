@@ -1,0 +1,5 @@
+mkdir -p /app/paths/ddbb-s-events/4_with_back_noisy/val/evk4/
+mkdir -p /app/paths/ddbb-s-events/4_with_back_noisy/val/evk4/
+
+ln -s /app/input/ddbb-s-events/4_with_back_noisy/val/evk4/ /app/paths/ddbb-s-events/4_with_back_noisy/val/evk4/images
+ln -s /app/input/labels-events-2/detection/yolo/val/evk4/ /app/paths/ddbb-s-events/4_with_back_noisy/val/evk4/labels

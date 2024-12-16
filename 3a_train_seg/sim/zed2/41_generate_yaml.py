@@ -29,8 +29,8 @@ def generate_yaml(output_file, train_image_dir, train_mask_dir, val_image_dir, v
     print(f"Archivo YAML generado: {output_file}")
 
 if __name__ == "__main__":
-    exp_path = '1_without_back_without_blur'
-    sensor = 'asus'
+    exp_path = '4_with_back_with_blur'
+    sensor = 'zed2'
     train_image_dir = f"input/{exp_path}/train/{sensor}"
     train_mask_dir = f"input/labels/segmentation/train/{sensor}"
     val_image_dir = f"input/{exp_path}/val/{sensor}"

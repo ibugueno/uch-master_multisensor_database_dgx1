@@ -29,17 +29,17 @@ def generate_yaml(output_file, train_image_dir, train_mask_dir, val_image_dir, v
     print(f"Archivo YAML generado: {output_file}")
 
 if __name__ == "__main__":
-    exp_path = '1_without_back_without_blur'
-    sensor = 'asus'
-    train_image_dir = f"input/{exp_path}/train/{sensor}"
-    train_mask_dir = f"input/labels/segmentation/train/{sensor}"
-    val_image_dir = f"input/{exp_path}/val/{sensor}"
-    val_mask_dir = f"input/labels/segmentation/val/{sensor}"
+    exp_path = '1_without_back_clean'
+    sensor = 'davis346'
+    train_image_dir = f"input/ddbb-s-events/{exp_path}/train/{sensor}"
+    train_mask_dir = f"input/labels-events/segmentation/train/{sensor}"
+    val_image_dir = f"input/ddbb-s-events/{exp_path}/val/{sensor}"
+    val_mask_dir = f"input/labels-events/segmentation/val/{sensor}"
 
     hyperparameters = {
-        'batch_size': 32,
+        'batch_size': 128,
         'learning_rate': 0.0001,
-        'epochs': 1,
+        'epochs': 2,
         'device': 'cuda',
         'num_workers': 4
     }
@@ -68,9 +68,9 @@ if __name__ == "__main__":
         'zapatilla': 20
     }
 
-    image_size = (640, 480)
-    output_dir = f"output/ddbb-s/segmentation/{sensor}_exp{exp_path[:1]}_"
+    image_size = (346, 260)
+    output_dir = f"output/ddbb-s-events/segmentation/{sensor}_exp{exp_path[:1]}_"
     num_classes = len(class_mapping)
 
-    output_file = f'data/{exp_path[:1]}_data_config.yaml'
+    output_file = f'data/{sensor}_{exp_path[:1]}_data_config.yaml'
     generate_yaml(output_file, train_image_dir, train_mask_dir, val_image_dir, val_mask_dir, num_classes, hyperparameters, class_mapping, image_size, output_dir)

@@ -228,7 +228,8 @@ def validate_model(config):
 
 if __name__ == "__main__":
     current_file = os.path.basename(__file__)
-    config_path = f"data/{current_file[:1]}_data_config.yaml"
+    sensor = 'davis346'
+    config_path = f"data/{sensor}_{current_file[:1]}_data_config.yaml"
     config = load_config(config_path)
     train_model(config)
     validate_model(config)

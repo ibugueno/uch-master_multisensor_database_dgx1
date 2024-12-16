@@ -24,7 +24,7 @@ def list_jpg_files(directory, output_file):
 
 
 # Ruta del directorio base
-sensor = 'asus'
+sensor = 'davis346'
 base_path = 'output/ddbs-s_labels_original/segmentation'
 base_directory = f'{base_path}/{sensor}'
 

@@ -1,0 +1,27 @@
+# Contar archivos en una carpeta
+find . -type f -name "*.jpg" | wc -l
+
+# Copiar labels
+
+(base) root@101462be12bb:/app/output# cp -r labels/detection/yolo/test/evk4/ labels-events/detection/yolo/test/
+(base) root@101462be12bb:/app/output# cp -r labels/detection/yolo/train/evk4/ labels-events/detection/yolo/train/
+(base) root@101462be12bb:/app/output# cp -r labels/detection/yolo/val/evk4/ labels-events/detection/yolo/val/
+
+cp -r labels/detection/yolo/test/evk4/ labels-events/detection/yolo/test/
+cp -r labels/detection/yolo/train/evk4/ labels-events/detection/yolo/train/
+cp -r labels/detection/yolo/val/evk4/ labels-events/detection/yolo/val/
+
+cp -r labels/segmentation/test/evk4/ labels-events/segmentation/test/
+cp -r labels/segmentation/train/evk4/ labels-events/segmentation/train/
+cp -r labels/segmentation/val/evk4/ labels-events/segmentation/val/
+
+cp -r labels/pose6d/test/evk4/ labels-events/pose6d/test/
+cp -r labels/pose6d/train/evk4/ labels-events/pose6d/train/
+cp -r labels/pose6d/val/evk4/ labels-events/pose6d/val/
+
+
+# Enlistar antes de borrar
+find /ruta/a/la/carpeta -type f \( -name "*scn0*" -o -name "*scn3*" \)
+
+# Borrar
+find carpeta/ -type f \( -name "*scn0*" -o -name "*scn3*" \) -exec rm -v {} +

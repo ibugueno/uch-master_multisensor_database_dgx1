@@ -36,6 +36,7 @@ class SegmentationDataset(Dataset):
             self.image_files = [self.image_files[i] for i in selected_indices]
             self.mask_files = [self.mask_files[i] for i in selected_indices]
 
+
         # Actualizar conteo de clases después del muestreo
         self.filtered_class_counts = defaultdict(int)
         for mask_file in self.mask_files:
@@ -43,7 +44,8 @@ class SegmentationDataset(Dataset):
                 if class_name in mask_file:
                     self.filtered_class_counts[class_name] += 1
                     break
-
+        
+        '''
         print("Conteo de clases antes del filtrado:")
         for class_name, count in self.class_counts.items():
             print(f"Clase {class_name}: {count} muestras")
@@ -51,6 +53,8 @@ class SegmentationDataset(Dataset):
         print("\nConteo de clases después del filtrado:")
         for class_name, count in self.filtered_class_counts.items():
             print(f"Clase {class_name}: {count} muestras")
+        '''
+
 
     def __len__(self):
         return len(self.image_files)
@@ -94,7 +98,19 @@ def setup_output_dir(output_dir):
     os.makedirs(output_dir, exist_ok=True)
     print(f"Los resultados se guardarán en: {output_dir}")
 
-def train_model(config):
+def compute_previous_path(output_dir):
+    """Restar 1 al identificador del experimento en el `output_dir`."""
+        
+    if "exp" in output_dir:
+        base, exp_num = output_dir.rsplit("_exp", 1)
+        exp_num = exp_num[:1]
+        
+        if exp_num.isdigit():
+            previous_path = f"{base}_exp{int(exp_num) - 1}_"            
+            return previous_path
+    return None
+
+def train_model(config, pretrained_weights_path):
     setup_output_dir(config['output_dir'])
     train_image_dir = config['train']['images']
     train_mask_dir = config['train']['masks']
@@ -104,10 +120,18 @@ def train_model(config):
     num_workers = config['hyperparameters']['num_workers']
     device = torch.device(config['hyperparameters']['device'] if torch.cuda.is_available() else 'cpu')
 
-    dataset = SegmentationDataset(train_image_dir, train_mask_dir, config['classes'], transforms=get_transform(), use_half=False)
+    dataset = SegmentationDataset(train_image_dir, train_mask_dir, config['classes'], transforms=get_transform(), use_half=True, split_data=4)
     data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     num_classes = config['num_classes']
     model = get_model(num_classes)
+
+    # Cargar los pesos preentrenados
+    if pretrained_weights_path and os.path.exists(pretrained_weights_path):
+        state_dict = torch.load(pretrained_weights_path)
+        model.load_state_dict(state_dict)
+    else:
+        print("No se encontraron pesos preentrenados, se entrenará desde cero.")
+
     model.to(device)
 
     # Calcular pesos para el balance de clases
@@ -228,7 +252,13 @@ def validate_model(config):
 
 if __name__ == "__main__":
     current_file = os.path.basename(__file__)
-    config_path = f"data/{current_file[:1]}_data_config.yaml"
+    sensor = 'evk4'
+    config_path = f"data/{sensor}_{current_file[:1]}_data_config.yaml"
     config = load_config(config_path)
-    train_model(config)
+
+    pretrained_weights_path = os.path.join(compute_previous_path(config['output_dir']), "deeplabv3_model.pth")
+
+    print(f"Se usaran los pesos previos guardados en: {pretrained_weights_path}")
+
+    train_model(config, pretrained_weights_path)
     validate_model(config)

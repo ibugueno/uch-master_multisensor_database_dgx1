@@ -1,13 +1,13 @@
 import os
 
 # Ruta raíz
-root_dir = 'input'
+root_dir = 'input/frames_for_generate_val_with_back_without_blur/3_ddbs-s_with_back_without_blur'
 
 # Lista para almacenar todas las rutas completas de los directorios de orientación
 orientation_dirs = []
 
 # Archivo de salida
-output_file = 'input/all_folders.txt'
+output_file = 'data/files_frames_for_generate_val_with_back_without_blur.txt'
 
 # Recorrer recursivamente la estructura de directorios
 for subdir1 in ['asus','zed2','davis346', 'evk4']:  # Nivel 1: 'davis346', 'evk4'

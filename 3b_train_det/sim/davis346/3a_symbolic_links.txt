@@ -1,0 +1,5 @@
+mkdir -p /app/paths/ddbb-s-events/3_with_back_clean/val/davis346/
+mkdir -p /app/paths/ddbb-s-events/3_with_back_clean/val/davis346/
+
+ln -s /app/input/ddbb-s-events/3_with_back_clean/val/davis346/ /app/paths/ddbb-s-events/3_with_back_clean/val/davis346/images
+ln -s /app/input/labels-events-2/detection/yolo/val/davis346/ /app/paths/ddbb-s-events/3_with_back_clean/val/davis346/labels

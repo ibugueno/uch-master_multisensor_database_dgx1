@@ -1,0 +1,19 @@
+mkdir -p /app/paths/ddbb-s-events/1_without_back_clean/train/evk4/
+mkdir -p /app/paths/ddbb-s-events/1_without_back_clean/train/evk4/
+
+ln -s /app/input/ddbb-s-events/1_without_back_clean/train/evk4/ /app/paths/ddbb-s-events/1_without_back_clean/train/evk4/images
+ln -s /app/input/labels-events/detection/yolo/train/evk4/ /app/paths/ddbb-s-events/1_without_back_clean/train/evk4/labels
+
+
+mkdir -p /app/paths/ddbb-s-events/1_without_back_clean/val/evk4/
+mkdir -p /app/paths/ddbb-s-events/1_without_back_clean/val/evk4/
+
+ln -s /app/input/ddbb-s-events/1_without_back_clean/val/evk4/ /app/paths/ddbb-s-events/1_without_back_clean/val/evk4/images
+ln -s /app/input/labels-events/detection/yolo/val/evk4/ /app/paths/ddbb-s-events/1_without_back_clean/val/evk4/labels
+
+
+mkdir -p /app/paths/ddbb-s-events/1_without_back_clean/test/evk4/
+mkdir -p /app/paths/ddbb-s-events/1_without_back_clean/test/evk4/
+
+ln -s /app/input/ddbb-s-events/1_without_back_clean/test/evk4/ /app/paths/ddbb-s-events/1_without_back_clean/test/evk4/images
+ln -s /app/input/labels-events/detection/yolo/test/evk4/ /app/paths/ddbb-s-events/1_without_back_clean/test/evk4/labels
