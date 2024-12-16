@@ -103,7 +103,7 @@ def calculate_metrics(predictions, ground_truths, xy_predictions, xy_ground_trut
 def main():
     # Configuraciones
     exp = 1
-    sensor = 'asus'
+    sensor = 'zed2'
     img_width = 640
     img_height = 480
 

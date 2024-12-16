@@ -107,7 +107,7 @@ def main():
     exp = int(current_file[:1])
 
     # Configuraciones
-    sensor = 'asus'
+    sensor = 'zed2'
     img_width = 640
     img_height = 480
 

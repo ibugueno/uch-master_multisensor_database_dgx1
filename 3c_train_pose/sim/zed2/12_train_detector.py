@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # Obtener el nombre del archivo actual y extraer información
     current_file = os.path.basename(__file__)
     exp = int(current_file[:1])
-    sensor = 'asus'
+    sensor = 'zed2'
 
 
     # Leer configuración YAML
